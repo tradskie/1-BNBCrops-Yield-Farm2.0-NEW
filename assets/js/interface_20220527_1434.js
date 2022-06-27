@@ -17,37 +17,24 @@ function spendLimit(callback) {
     })
     .catch((err) => {
       console.log(err)
-    })
+    })invest
 }
  */
 function userBalance(callback) {
-  tokenContract.methods
-    .balanceOf(currentAddr)
-    .call()
-    .then((result) => {
-      var amt = web3.utils.fromWei(result)
-      // console.log("balance " + amt)
-      callback(amt)
-      usrBal = amt
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  web3.eth.getBalance(currentAddr).then(result => {
+    callback(web3.utils.fromWei(result));
+}).catch((err) => {
+    console.log(err)
+});
 }
 
 // Modified
 function contractBalance(callback) {
-  tokenContract.methods
-    .balanceOf("0xf52C3902678Aa4Af29F58A9582dAaB792cf5eA5b")
-    .call()
-    .then((result) => {
-      var amt = web3.utils.fromWei(result)
-      //console.log("balance" + amt)
-      callback(amt)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  web3.eth.getBalance(minersAddr).then(result => {
+    callback(web3.utils.fromWei(result));
+}).catch((err) => {
+    console.log(err)
+});
 }
 
 // Done
@@ -228,8 +215,8 @@ function withdraw(callback) {
 
 function invest(ref, plan, trx, callback) {
   minersContract.methods
-    .invest(ref, plan, web3.utils.toWei(trx))
-    .send({ from: currentAddr })
+    .invest(ref, plan)
+    .send({ from: currentAddr, value: trx })
     .then((result) => {
       callback()
     })
