@@ -13,7 +13,7 @@ window.addEventListener("load", async function () {
     try {
       await ethereum.enable() // Request access
       minersContract = await new web3.eth.Contract(minersAbi, minersAddr)
-      tokenContract = await new web3.eth.Contract(tokenAbi, tokenAddr)
+      //tokenContract = await new web3.eth.Contract(tokenAbi, tokenAddr)
       let accounts = await web3.eth.getAccounts()
       currentAddr = accounts[0]
       setTimeout(function () {
@@ -29,7 +29,7 @@ window.addEventListener("load", async function () {
   else if (window.web3) {
     window.web3 = new Web3(web3.currentProvider)
     minersContract = await new web3.eth.Contract(minersAbi, minersAddr)
-    tokenContract = await new web3.eth.Contract(tokenAbi, tokenAddr)
+    //tokenContract = await new web3.eth.Contract(tokenAbi, tokenAddr)
     let accounts = await web3.eth.getAccounts()
     currentAddr = accounts[0]
     setTimeout(function () {
@@ -198,13 +198,13 @@ function populateUserTotalReferrals() {
   })
 }
 
-function populateSpendLimit() {
-  var spentLimitElem = document.getElementById("spend-limit")
-  spendLimit(function (result) {
-    rawStr = Number(result).toFixed(2)
-    if (spentLimitElem) spentLimitElem.textContent = rawStr
-  })
-}
+// function populateSpendLimit() {
+//   var spentLimitElem = document.getElementById("spend-limit")
+//   spendLimit(function (result) {
+//     rawStr = Number(result).toFixed(2)
+//     if (spentLimitElem) spentLimitElem.textContent = rawStr
+//   })
+// }
 
 function populateUserBalance() {
   var userBalanceElem = document.getElementById("user-balance")
@@ -488,7 +488,7 @@ function populateDepositTable() {
 
       if (results && results.length > 0) {
         //console.log(`Display deposits div`)
-        document.getElementById("div-deposits").style.display = "block"
+        // document.getElementById("div-deposits").style.display = "block"
       }
     })
   }
@@ -517,7 +517,7 @@ function refreshAllData() {
   populateUserUserTotalWithdrawn()
   populateUserReferralTotalBonus()
   populateUserTotalReferrals()
-  populateSpendLimit()
+  // populateSpendLimit()
   populateUserBalance()
   populateUserCutOff()
 
