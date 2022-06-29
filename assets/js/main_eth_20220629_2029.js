@@ -41,7 +41,7 @@ window.addEventListener("load", async function () {
 
 function copyRef() {
   var copyText
-  copyText = window.location.origin + "/index.htm?ref=" + currentAddr
+  copyText = window.location.origin + "/index.html?ref=" + currentAddr
   navigator.clipboard.writeText(copyText)
   $("#copied").html("<i class='ri-checkbox-circle-line'> copied!</i>")
 }
