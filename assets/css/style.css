@@ -722,7 +722,8 @@ body {
   }
 }
 .avax {
-  color: #ffc107;
+  /* color: #ffc107; */
+  color: white;
   font-weight: bold;
 }
 .totals-text {
