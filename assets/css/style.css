@@ -1052,10 +1052,10 @@ section #withdraw {
 }
 
 .services .icon-box .icon .img-fluid {
-  width: 400px;
-  height: 150px;
+  /* width: 1024px;
+  height: 516px; */
   max-width: 100%;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .services .icon-box .icon {
   margin: 0 auto;
@@ -1198,8 +1198,8 @@ section #withdraw {
   display: block;
 }
 .img-fluid {
-  width: 400px;
-  height: 50px;
+  /* width: 1024px;
+  height: 516px; */
   max-width: 100%;
   margin-right: 5px;
 }
