@@ -40,11 +40,9 @@ window.addEventListener("load", async function () {
 })
 
 function copyRef() {
-  var $temp = $("<input>")
-  $("body").append($temp)
-  $temp.val($("#reflink").text()).select()
-  document.execCommand("copy")
-  $temp.remove()
+  var copyText
+  copyText = window.location.origin + "/index.htm?ref=" + currentAddr
+  navigator.clipboard.writeText(copyText)
   $("#copied").html("<i class='ri-checkbox-circle-line'> copied!</i>")
 }
 
@@ -57,7 +55,7 @@ function myReferralLink(address) {
 async function connect() {
   console.log("Connecting to wallet...")
   try {
-    var accounts = await ethereum.request({ method: "eth_requestAccounts" })
+    var accounts = await ethereum.request({method: "eth_requestAccounts"})
     if (accounts.length == 0) {
       console.log("Please connect to MetaMask.")
       $("#enableMetamask").html("Connect Metamask")
@@ -67,10 +65,7 @@ async function connect() {
         myReferralLink(currentAddr)
         console.log("Wallet connected = " + currentAddr)
 
-        let shortenedAccount = currentAddr.replace(
-          currentAddr.substring(5, 38),
-          "***"
-        )
+        let shortenedAccount = currentAddr.replace(currentAddr.substring(5, 38), "***")
         $("#enableMetamask").html(shortenedAccount)
         $(".withdraw-btn").each(function () {
           $(this).attr("disabled", false)
@@ -174,19 +169,15 @@ function populateUserUserTotalWithdrawn() {
   var userTotalWithdrawnElem = document.getElementById("user-total-withdrawn")
   userTotalWithdrawn(function (result) {
     rawStr = Number(result).toFixed(2)
-    if (userTotalWithdrawnElem)
-      userTotalWithdrawnElem.textContent = stripDecimals(rawStr)
+    if (userTotalWithdrawnElem) userTotalWithdrawnElem.textContent = stripDecimals(rawStr)
   })
 }
 
 function populateUserReferralTotalBonus() {
-  var userReferralTotalBonusElem = document.getElementById(
-    "user-referral-total-bonus"
-  )
+  var userReferralTotalBonusElem = document.getElementById("user-referral-total-bonus")
   userReferralTotalBonus(function (result) {
     rawStr = Number(result).toFixed(2)
-    if (userReferralTotalBonusElem)
-      userReferralTotalBonusElem.textContent = stripDecimals(rawStr)
+    if (userReferralTotalBonusElem) userReferralTotalBonusElem.textContent = stripDecimals(rawStr)
   })
 }
 
@@ -363,9 +354,7 @@ function populateUserWithdrawCountdown() {
   }
   //console.log(maxCheckpointDate);
 
-  var nextWithdraw = new Date(
-    maxCheckpointDate.getTime() + 1000 * parseInt(withdrawCooldownValue)
-  )
+  var nextWithdraw = new Date(maxCheckpointDate.getTime() + 1000 * parseInt(withdrawCooldownValue))
 
   textStr = returnDHMRemaining(nextWithdraw)
   //console.log(textStr);
@@ -375,9 +364,7 @@ function populateUserWithdrawCountdown() {
 function populatePlan1Info() {
   //var usercutoffElem = document.getElementById('user-cutoff');
   var plan1Table = document.getElementById("plan1-info")
-  var plan1TableBody = document
-    .getElementById("plan1-info")
-    .getElementsByTagName("tbody")[0]
+  var plan1TableBody = document.getElementById("plan1-info").getElementsByTagName("tbody")[0]
   Plan1Info(function (result) {
     //console.log(result);
     let time = result["time"]
@@ -397,9 +384,7 @@ function populatePlan1Info() {
     const newRow = plan1TableBody.insertRow(plan1TableBody.rows.length)
     newRow.innerHTML = `
         <tr>
-            <td>Investors</td><td>${
-              planTotalInvestorCount + planTotalReInvestorCount
-            }</td>
+            <td>Investors</td><td>${planTotalInvestorCount + planTotalReInvestorCount}</td>
         </tr>
         `
 
@@ -445,9 +430,7 @@ function populatePlan1Info() {
 
 function populateDepositTable() {
   var depositsTable = document.getElementById("table-deposits")
-  var depositsTableBody = document
-    .getElementById("table-deposits")
-    .getElementsByTagName("tbody")[0]
+  var depositsTableBody = document.getElementById("table-deposits").getElementsByTagName("tbody")[0]
   if (depositsTable) {
     getUserDeposits(function (results) {
       // console.log(`Deposits = `, results)
@@ -455,7 +438,7 @@ function populateDepositTable() {
       for (var i = rowCount - 1; i > 0; i--) {
         depositsTable.deleteRow(i)
       }
-      results.forEach((deposit) => {
+      results.forEach(deposit => {
         var today = new Date()
         var dateEndNonLocale = new Date(deposit.finish * 1000)
 
@@ -469,16 +452,12 @@ function populateDepositTable() {
         textStr = diffDays + " days"
 
         const reinvested = deposit.reinvested
-        const newRow = depositsTableBody.insertRow(
-          depositsTableBody.rows.length
-        )
+        const newRow = depositsTableBody.insertRow(depositsTableBody.rows.length)
         newRow.innerHTML = `
                 <tr>
                     <td>Plan ${+deposit.plan + 1}</td>
                     <td>${deposit.percent / 10}%</td>
-                    <td>${Number(
-                      (deposit.amount * 10 ** -18).toFixed(2)
-                    )} BUSD</td>
+                    <td>${Number((deposit.amount * 10 ** -18).toFixed(2))} BUSD</td>
                     <td>${dateStart}</td>
                     <td>${dateEnd}</td>
                     <td>${textStr}</td>
@@ -542,8 +521,8 @@ function investInPlan1() {
   if (!web3.utils.isAddress(ref)) {
     ref = currentAddr
   }
-  var bnb = trxspenddoc.value;
-  var amt = web3.utils.toWei(bnb);
+  var bnb = trxspenddoc.value
+  var amt = web3.utils.toWei(bnb)
   console.log(amt)
   invest(ref, plan, amt, function () {
     displayTransactionMessage()
@@ -558,8 +537,8 @@ function investInPlan2() {
   if (!web3.utils.isAddress(ref)) {
     ref = currentAddr
   }
-  var bnb = trxspenddoc.value;
-  var amt = web3.utils.toWei(bnb);
+  var bnb = trxspenddoc.value
+  var amt = web3.utils.toWei(bnb)
   console.log(amt)
   invest(ref, plan, amt, function () {
     displayTransactionMessage()
@@ -574,8 +553,8 @@ function investInPlan3() {
   if (!web3.utils.isAddress(ref)) {
     ref = currentAddr
   }
-  var bnb = trxspenddoc.value;
-  var amt = web3.utils.toWei(bnb);
+  var bnb = trxspenddoc.value
+  var amt = web3.utils.toWei(bnb)
   console.log(amt)
   invest(ref, plan, amt, function () {
     displayTransactionMessage()
@@ -590,8 +569,8 @@ function investInPlan4() {
   if (!web3.utils.isAddress(ref)) {
     ref = currentAddr
   }
-  var bnb = trxspenddoc.value;
-  var amt = web3.utils.toWei(bnb);
+  var bnb = trxspenddoc.value
+  var amt = web3.utils.toWei(bnb)
   console.log(amt)
   invest(ref, plan, amt, function () {
     displayTransactionMessage()
