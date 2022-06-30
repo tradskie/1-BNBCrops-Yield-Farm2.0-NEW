@@ -131,8 +131,8 @@ function populateContractBalance() {
   var balanceElem = document.getElementById("contract-balance")
   var baseNum = 0
   contractBalance(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(3))
-    if (balanceElem) balanceElem.textContent = stripDecimals(rawStr, 2)
+    rawStr = numberWithCommas(Number(result).toFixed(5))
+    if (balanceElem) balanceElem.textContent = stripDecimals(rawStr, 5)
   })
 }
 
@@ -141,7 +141,7 @@ function populateUserDeposits() {
   var userDepositElem = document.getElementById("user-deposits")
   var baseNum = 0
   userTotalDeposits(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(2))
+    rawStr = numberWithCommas(Number(result).toFixed(5))
     if (userDepositElem) userDepositElem.textContent = rawStr
   })
 }
@@ -151,8 +151,8 @@ function populateTotalInvested() {
   var investedElem = document.getElementById("total-invested")
   var baseNum = 0
   totalInvested(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(2))
-    if (investedElem) investedElem.textContent = stripDecimals(rawStr, 2)
+    rawStr = numberWithCommas(Number(result).toFixed(5))
+    if (investedElem) investedElem.textContent = stripDecimals(rawStr, 5)
   })
 }
 
@@ -160,7 +160,7 @@ function populateUserAvailable() {
   // UserTotalDeposits
   var userAvailableElem = document.getElementById("user-available")
   userAvailable(function (result) {
-    rawStr = Number(result).toFixed(2)
+    rawStr = Number(result).toFixed(5)
     if (userAvailableElem) userAvailableElem.textContent = stripDecimals(rawStr)
   })
 }
@@ -457,7 +457,7 @@ function populateDepositTable() {
                 <tr>
                     <td>Plan ${+deposit.plan + 1}</td>
                     <td>${deposit.percent / 10}%</td>
-                    <td>${Number((deposit.amount * 10 ** -18).toFixed(2))} BUSD</td>
+                    <td>${Number((deposit.amount * 10 ** -18).toFixed(2))} BNB</td>
                     <td>${dateStart}</td>
                     <td>${dateEnd}</td>
                     <td>${textStr}</td>
