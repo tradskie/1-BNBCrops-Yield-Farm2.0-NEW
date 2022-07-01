@@ -131,8 +131,11 @@ function populateContractBalance() {
   var balanceElem = document.getElementById("contract-balance")
   var baseNum = 0
   contractBalance(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(5))
-    if (balanceElem) balanceElem.textContent = stripDecimals(rawStr, 5)
+    rawStr = Number(result).toFixed(5)
+    balanceElem.textContent = rawStr
+
+    // rawStr = numberWithCommas(Number(result).toFixed(5))
+    // if (balanceElem) balanceElem.textContent = stripDecimals(rawStr, 5)
   })
 }
 
@@ -141,8 +144,10 @@ function populateUserDeposits() {
   var userDepositElem = document.getElementById("user-deposits")
   var baseNum = 0
   userTotalDeposits(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(5))
-    if (userDepositElem) userDepositElem.textContent = rawStr
+    rawStr = Number(result).toFixed(5)
+    userDepositElem.textContent = rawStr
+    // rawStr = numberWithCommas(Number(result).toFixed(5))
+    // if (userDepositElem) userDepositElem.textContent = rawStr
   })
 }
 
@@ -151,8 +156,11 @@ function populateTotalInvested() {
   var investedElem = document.getElementById("total-invested")
   var baseNum = 0
   totalInvested(function (result) {
-    rawStr = numberWithCommas(Number(result).toFixed(5))
-    if (investedElem) investedElem.textContent = stripDecimals(rawStr, 5)
+    rawStr = Number(result).toFixed(5)
+    investedElem.textContent = rawStr
+
+    // rawStr = numberWithCommas(Number(result).toFixed(5))
+    // if (investedElem) investedElem.textContent = stripDecimals(rawStr, 5)
   })
 }
 
@@ -168,7 +176,7 @@ function populateUserAvailable() {
 function populateUserUserTotalWithdrawn() {
   var userTotalWithdrawnElem = document.getElementById("user-total-withdrawn")
   userTotalWithdrawn(function (result) {
-    rawStr = Number(result).toFixed(2)
+    rawStr = Number(result).toFixed(5)
     if (userTotalWithdrawnElem) userTotalWithdrawnElem.textContent = stripDecimals(rawStr)
   })
 }
@@ -176,7 +184,7 @@ function populateUserUserTotalWithdrawn() {
 function populateUserReferralTotalBonus() {
   var userReferralTotalBonusElem = document.getElementById("user-referral-total-bonus")
   userReferralTotalBonus(function (result) {
-    rawStr = Number(result).toFixed(2)
+    rawStr = Number(result).toFixed(5)
     if (userReferralTotalBonusElem) userReferralTotalBonusElem.textContent = stripDecimals(rawStr)
   })
 }
@@ -184,7 +192,7 @@ function populateUserReferralTotalBonus() {
 function populateUserTotalReferrals() {
   var userTotalReferralsElem = document.getElementById("user-total-referrals")
   userTotalReferrals(function (result) {
-    rawStr = Number(result).toFixed()
+    rawStr = Number(result).toFixed(5)
     if (userTotalReferralsElem) userTotalReferralsElem.textContent = rawStr
   })
 }
@@ -200,7 +208,7 @@ function populateUserTotalReferrals() {
 function populateUserBalance() {
   var userBalanceElem = document.getElementById("user-balance")
   userBalance(function (result) {
-    rawStr = Number(result).toFixed(2)
+    rawStr = Number(result).toFixed(5)
     if (userBalanceElem) userBalanceElem.textContent = rawStr
   })
 }
